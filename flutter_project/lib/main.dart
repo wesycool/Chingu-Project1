@@ -64,13 +64,52 @@ class _DashboardState extends State<Dashboard> {
           child: Column(children: <Widget>[
         _buildSearchBar(),
         Container(
+            constraints: BoxConstraints(minHeight: 50),
+            child: Align(
+                alignment: Alignment.bottomCenter,
+                child: _buildArticleHeader())),
+        Container(
             constraints: BoxConstraints(minWidth: 250, maxHeight: 250),
-            child: _buildListView()),
+            child: _buildArticleListView()),
       ])),
     );
   }
 
-  Widget _buildListView() {
+  Widget _buildSearchBar() {
+    return TextField(
+      controller: editingController,
+      onChanged: (value) {
+        filterSearchResults(value);
+      },
+      decoration: InputDecoration(
+        labelText: "Search",
+        hintText: "Search",
+        prefixIcon: Icon(Icons.search),
+      ),
+    );
+  }
+
+  Widget _buildArticleHeader() {
+    return Row(children: [
+      Expanded(
+        child: Text('Articles'),
+      ),
+      InkWell(
+        child: Text(
+          'All Articles',
+          style: new TextStyle(
+            color: Colors.blue,
+          ),
+          textAlign: TextAlign.right,
+        ),
+        onTap: () {
+          navigateToSubPage(context);
+        },
+      ),
+    ]);
+  }
+
+  Widget _buildArticleListView() {
     return ListView.builder(
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
@@ -97,16 +136,34 @@ class _DashboardState extends State<Dashboard> {
         });
   }
 
-  Widget _buildSearchBar() {
-    return TextField(
-      controller: editingController,
-      onChanged: (value) {
-        filterSearchResults(value);
-      },
-      decoration: InputDecoration(
-        labelText: "Search",
-        hintText: "Search",
-        prefixIcon: Icon(Icons.search),
+  Future navigateToSubPage(context) async {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => SubPage()));
+  }
+}
+
+class SubPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Sub Page'),
+        backgroundColor: Colors.redAccent,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text('Click button to back to Main Page'),
+            RaisedButton(
+              textColor: Colors.white,
+              color: Colors.redAccent,
+              child: Text('Back to Main Page'),
+              onPressed: () {
+                // TODO
+              },
+            )
+          ],
+        ),
       ),
     );
   }
