@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'article_list.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,7 +22,7 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   TextEditingController editingController = TextEditingController();
-  final duplicateItems = List<String>.generate(10, (i) => "Item $i");
+  final duplicateItems = List<String>.generate(15, (i) => "Item $i");
   var items = List<String>();
 
   @override
@@ -137,34 +138,9 @@ class _DashboardState extends State<Dashboard> {
   }
 
   Future navigateToSubPage(context) async {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => SubPage()));
-  }
-}
-
-class SubPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Sub Page'),
-        backgroundColor: Colors.redAccent,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text('Click button to back to Main Page'),
-            RaisedButton(
-              textColor: Colors.white,
-              color: Colors.redAccent,
-              child: Text('Back to Main Page'),
-              onPressed: () {
-                // TODO
-              },
-            )
-          ],
-        ),
-      ),
-    );
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => SubPage(items: duplicateItems)));
   }
 }
