@@ -88,12 +88,12 @@ class _DashboardState extends State<Dashboard> {
 
   Widget _buildArticleHeader() {
     return Row(children: [
-      Expanded(child: Text('Articles', textScaleFactor: 1.5)),
+      Expanded(child: Text('Articles', textScaleFactor: 1.25)),
       InkWell(
         child: Text('All Articles',
             style: new TextStyle(color: Colors.blue),
             textAlign: TextAlign.right,
-            textScaleFactor: 1.5),
+            textScaleFactor: 1.25),
         onTap: () => navigateToAllArticles(context),
       ),
     ]);
@@ -120,9 +120,9 @@ class _DashboardState extends State<Dashboard> {
       child: Center(
         child: Column(children: [
           Container(
-              constraints: BoxConstraints(maxHeight: 200),
+              constraints: BoxConstraints(minHeight: 175, maxHeight: 175),
               child: Image.network(article['imgLink'].toString())),
-          Text(article['title'])
+          ListTile(title: Text(article['title'])),
         ]),
       ),
     );
@@ -140,7 +140,8 @@ class _DashboardState extends State<Dashboard> {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => SingleArticle(article: article)));
+            builder: (context) =>
+                SingleArticle(context: context, article: article)));
   }
 }
 

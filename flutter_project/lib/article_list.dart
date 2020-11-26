@@ -23,41 +23,30 @@ class AllArticles extends StatelessWidget {
       scrollDirection: Axis.vertical,
       itemCount: articles.length,
       itemBuilder: (context, index) {
-        return Container(
-          constraints: BoxConstraints(maxHeight: 100),
-          child: InkWell(
+        final article = articles[index];
+
+        return Card(
+          child: ListTile(
+            contentPadding: const EdgeInsets.all(5),
+            isThreeLine: true,
+            title: Text(article['title']),
+            subtitle: Text(article['description'].split('\n')[0]),
+            leading: ConstrainedBox(
+              constraints: BoxConstraints(minWidth: 100),
+              child: Image.network(article['imgLink'].toString()),
+            ),
             onTap: () => navigateToSingleArticle(articles[index]),
-            child: _buildArticleCard(articles[index]),
           ),
         );
       },
     );
   }
 
-  Widget _buildArticleCard(article) {
-    return Card(
-        child: Row(children: <Widget>[
-      Container(
-        constraints: BoxConstraints(minWidth: 150),
-        child: Image.network(article['imgLink'].toString()),
-      ),
-      Container(
-        margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(article['title']),
-            Text(article['description']),
-          ],
-        ),
-      ),
-    ]));
-  }
-
   navigateToSingleArticle(article) {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => SingleArticle(article: article)));
+            builder: (context) =>
+                SingleArticle(context: context, article: article)));
   }
 }
