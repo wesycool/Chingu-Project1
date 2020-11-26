@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(SubPage());
-}
-
 class SubPage extends StatelessWidget {
-  final List<String> items;
+  final List<dynamic> items;
   SubPage({Key key, @required this.items}) : super(key: key);
 
   @override
@@ -24,7 +20,7 @@ class SubPage extends StatelessWidget {
     return ListView.builder(
       itemCount: items.length,
       itemBuilder: (context, index) {
-        return Container(child: Text(items[index].toString()));
+        return Container(child: Text(items[index]['title'].toString()));
       },
     );
   }

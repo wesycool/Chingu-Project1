@@ -1,42 +1,56 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'article_list.dart';
 
-void main() {
-  runApp(MyApp());
+Future<void> main() async {
+  var data = await parseJson();
+  runApp(MyApp(
+    data: data,
+  ));
 }
 
 class MyApp extends StatelessWidget {
+  final List<dynamic> data;
+  MyApp({Key key, @required this.data}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Chingu Project',
-      home: Dashboard(),
+      home: Dashboard(data: data),
     );
   }
 }
 
 class Dashboard extends StatefulWidget {
+  final List<dynamic> data;
+  Dashboard({Key key, @required this.data}) : super(key: key);
+
   @override
-  _DashboardState createState() => _DashboardState();
+  _DashboardState createState() => _DashboardState(data: data);
 }
 
 class _DashboardState extends State<Dashboard> {
+  final List<dynamic> data;
+  _DashboardState({@required this.data});
+
   TextEditingController editingController = TextEditingController();
-  final duplicateItems = List<String>.generate(15, (i) => "Item $i");
-  var items = List<String>();
+  var items = List<dynamic>();
 
   @override
   void initState() {
-    items.addAll(duplicateItems);
+    items.addAll(data);
     super.initState();
   }
 
   void filterSearchResults(String query) {
-    List<String> dummySearchList = List<String>();
-    dummySearchList.addAll(duplicateItems);
+    List<dynamic> dummySearchList = List<dynamic>();
+    dummySearchList.addAll(data);
 
     if (query.isNotEmpty) {
-      List<String> dummyListData = List<String>();
+      List<dynamic> dummyListData = List<dynamic>();
       dummySearchList.forEach((item) {
         if (item.contains(query)) {
           dummyListData.add(item);
@@ -50,7 +64,7 @@ class _DashboardState extends State<Dashboard> {
     } else {
       setState(() {
         items.clear();
-        items.addAll(duplicateItems);
+        items.addAll(data);
       });
     }
   }
@@ -126,7 +140,7 @@ class _DashboardState extends State<Dashboard> {
                       Image.network(
                           'https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png'),
                       Text(
-                        items[index].toString(),
+                        items[index]['title'].toString(),
                       )
                     ]),
                   ),
@@ -139,8 +153,17 @@ class _DashboardState extends State<Dashboard> {
 
   Future navigateToSubPage(context) async {
     Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => SubPage(items: duplicateItems)));
+        context, MaterialPageRoute(builder: (context) => SubPage(items: data)));
   }
+}
+
+
+
+Future<String> _loadFromAsset() async {
+  return await rootBundle.loadString("assets/articles.json");
+}
+
+Future parseJson() async {
+  String jsonString = await _loadFromAsset();
+  return jsonDecode(jsonString);
 }
