@@ -7,12 +7,8 @@ class SubPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('All Articles'),
-      ),
-      body: Container(
-        child: _buildFullListListView(),
-      ),
+      appBar: AppBar(title: Text('All Articles')),
+      body: Container(child: _buildFullListListView()),
     );
   }
 

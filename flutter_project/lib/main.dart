@@ -5,10 +5,9 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'article_list.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   var data = await parseJson();
-  runApp(MyApp(
-    data: data,
-  ));
+  runApp(MyApp(data: data));
 }
 
 class MyApp extends StatelessWidget {
@@ -45,36 +44,10 @@ class _DashboardState extends State<Dashboard> {
     super.initState();
   }
 
-  void filterSearchResults(String query) {
-    List<dynamic> dummySearchList = List<dynamic>();
-    dummySearchList.addAll(data);
-
-    if (query.isNotEmpty) {
-      List<dynamic> dummyListData = List<dynamic>();
-      dummySearchList.forEach((item) {
-        if (item.contains(query)) {
-          dummyListData.add(item);
-        }
-      });
-      setState(() {
-        items.clear();
-        items.addAll(dummyListData);
-      });
-      return;
-    } else {
-      setState(() {
-        items.clear();
-        items.addAll(data);
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Dashboard'),
-      ),
+      appBar: AppBar(title: Text('Dashboard')),
       body: Container(
           child: Column(children: <Widget>[
         _buildSearchBar(),
@@ -84,6 +57,7 @@ class _DashboardState extends State<Dashboard> {
                 alignment: Alignment.bottomCenter,
                 child: _buildArticleHeader())),
         Container(
+            alignment: Alignment.centerLeft,
             constraints: BoxConstraints(minWidth: 250, maxHeight: 250),
             child: _buildArticleListView()),
       ])),
@@ -93,9 +67,7 @@ class _DashboardState extends State<Dashboard> {
   Widget _buildSearchBar() {
     return TextField(
       controller: editingController,
-      onChanged: (value) {
-        filterSearchResults(value);
-      },
+      onChanged: (value) => filterSearchResults(value),
       decoration: InputDecoration(
         labelText: "Search",
         hintText: "Search",
@@ -104,22 +76,27 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
+  void filterSearchResults(String query) {
+    List<dynamic> filteredList = data
+        .where((item) => query.isEmpty || item['title'].contains(query))
+        .toList();
+
+    setState(() {
+      items.clear();
+      items.addAll(filteredList);
+    });
+  }
+
   Widget _buildArticleHeader() {
     return Row(children: [
-      Expanded(
-        child: Text('Articles'),
-      ),
+      Expanded(child: Text('Articles')),
       InkWell(
         child: Text(
           'All Articles',
-          style: new TextStyle(
-            color: Colors.blue,
-          ),
+          style: new TextStyle(color: Colors.blue),
           textAlign: TextAlign.right,
         ),
-        onTap: () {
-          navigateToSubPage(context);
-        },
+        onTap: () => navigateToSubPage(context),
       ),
     ]);
   }
@@ -137,11 +114,11 @@ class _DashboardState extends State<Dashboard> {
                 child: Center(
                   child: Container(
                     child: Column(children: [
-                      Image.network(
-                          'https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png'),
-                      Text(
-                        items[index]['title'].toString(),
-                      )
+                      Container(
+                          constraints: BoxConstraints(maxHeight: 200),
+                          child: Image.network(
+                              items[index]['imgLink'].toString())),
+                      Text(items[index]['title'])
                     ]),
                   ),
                 ),
@@ -157,13 +134,7 @@ class _DashboardState extends State<Dashboard> {
   }
 }
 
-
-
-Future<String> _loadFromAsset() async {
-  return await rootBundle.loadString("assets/articles.json");
-}
-
 Future parseJson() async {
-  String jsonString = await _loadFromAsset();
+  String jsonString = await rootBundle.loadString("assets/articles.json");
   return jsonDecode(jsonString);
 }
