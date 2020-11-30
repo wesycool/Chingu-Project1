@@ -33,7 +33,7 @@ class AllArticles extends StatelessWidget {
             subtitle: Text(article['description'].split('\n')[0]),
             leading: ConstrainedBox(
               constraints: BoxConstraints(minWidth: 100),
-              child: Image.network(article['imgLink'].toString()),
+              child: Image.network(article['urlToImage'].toString()),
             ),
             onTap: () => navigateToSingleArticle(articles[index]),
           ),

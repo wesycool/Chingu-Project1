@@ -18,14 +18,13 @@ class SingleArticle extends StatelessWidget {
     return Column(children: [
       Container(
         constraints: BoxConstraints(maxHeight: 300),
-        child: Image.network(article['imgLink'].toString()),
+        child: Image.network(article['urlToImage'].toString()),
       ),
       Container(
           margin: const EdgeInsets.only(left: 20.0, right: 20.0),
           child: ListTile(
-            title: Text('About ${article["title"]}'),
-            subtitle:
-                Container(child: _buildAboutContent(article['description'])),
+            title: Text(article["description"]),
+            subtitle: Container(child: _buildAboutContent(article['content'])),
           ))
     ]);
   }

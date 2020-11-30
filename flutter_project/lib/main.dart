@@ -1,14 +1,20 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
+// import 'package:flutter/services.dart' show rootBundle; // Tier 1
+import 'package:http/http.dart' as http; // Tier 2
 import 'article_list.dart';
 import 'article.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final data = await parseJson();
-  runApp(MyApp(data: data));
+  // final data = await parseJson(); // Tier 1
+  final news = await fetchNews(); // Tier 2
+
+  runApp(MyApp(
+      data: news['articles']
+          .where((article) => article['content'] != null)
+          .toList()));
 }
 
 class MyApp extends StatelessWidget {
@@ -57,7 +63,7 @@ class _DashboardState extends State<Dashboard> {
                     child: _buildArticleHeader())),
             Container(
                 alignment: Alignment.centerLeft,
-                constraints: BoxConstraints(minWidth: 250, maxHeight: 250),
+                constraints: BoxConstraints(minWidth: 250, maxHeight: 350),
                 child: _buildArticleListView()),
           ])),
     );
@@ -120,8 +126,8 @@ class _DashboardState extends State<Dashboard> {
       child: Center(
         child: Column(children: [
           Container(
-              constraints: BoxConstraints(minHeight: 175, maxHeight: 175),
-              child: Image.network(article['imgLink'].toString())),
+              constraints: BoxConstraints(minHeight: 175),
+              child: Image.network(article['urlToImage'].toString())),
           ListTile(title: Text(article['title'])),
         ]),
       ),
@@ -145,7 +151,17 @@ class _DashboardState extends State<Dashboard> {
   }
 }
 
-Future parseJson() async {
-  String jsonString = await rootBundle.loadString("assets/articles.json");
-  return jsonDecode(jsonString);
+// Tier 1
+// Future parseJson() async {
+//   String jsonString = await rootBundle.loadString("assets/articles.json");
+//   return jsonDecode(jsonString);
+// }
+
+// Tier 2
+Future fetchNews() async {
+  final systemLocales = WidgetsBinding.instance.window.locale.countryCode;
+  final fetchNews = await http.get(
+      'https://newsapi.org/v2/top-headlines?country=$systemLocales&apiKey=4837e52081f04081b2c0c778e6a4f66e');
+
+  return jsonDecode(fetchNews.body);
 }

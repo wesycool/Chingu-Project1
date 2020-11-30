@@ -1,52 +1,52 @@
 [
     {
         "title":"Border Collie",
-        "imgLink":"https://media.gettyimages.com/photos/closeup-of-a-border-collie-isolated-on-white-picture-id609380557",
+        "urlToImage":"https://media.gettyimages.com/photos/closeup-of-a-border-collie-isolated-on-white-picture-id609380557",
         "description":"The Border Collie is a working and herding dog breed developed in the Anglo-Scottish border county of Northumberland, for herding livestock, especially sheep.\nConsidered highly intelligent, extremely energetic, acrobatic and athletic, they frequently compete with great success in sheepdog trials and dog sports. They are often cited as the most intelligent of all domestic dogs. Border collies continue to be employed in their traditional work of herding livestock throughout the world and are kept as pets."
     },
     {
         "title":"Poodle",
-        "imgLink":"https://media.gettyimages.com/photos/toy-poodle-puppy-wearing-a-red-harness-looking-at-the-camera-on-a-picture-id1176701724",
+        "urlToImage":"https://media.gettyimages.com/photos/toy-poodle-puppy-wearing-a-red-harness-looking-at-the-camera-on-a-picture-id1176701724",
         "description":"The Poodle is a dog breed that comes in three varieties: Standard Poodle, Miniature Poodle, and Toy Poodle. The origin of the breed is still discussed, with a prominent dispute over whether the poodle descends from Germany as a type of water dog, or from the French Barbet.\nRanked second most intelligent dog breed just behind the Border Collie, the poodle is skillful in many dog sports and activities, including agility, obedience, tracking, herding, circus performance, and assistance dogs. Poodles have taken top honors in many conformation shows, including \"Best in Show\" at the Westminster Kennel Club Dog Show in 1991, 2002, and 2020 and at the World Dog Show in 2007 and 2010. They are recorded as the seventh most popular dog breed in the United States.\nToy Poodles won \"Best in Show\" at Crufts in 1966 and 1982. Standard Poodles achieved the award in 1955, 1985, 2002, and 2014. The 2002 winner came from Norway and was the first overseas exhibit to win the Crufts best in show award."
     },
     {
         "title":"Bernese Mountain Dog",
-        "imgLink":"https://media.gettyimages.com/photos/bernese-mountain-dog-puppy-isolated-on-white-picture-id609380545",
+        "urlToImage":"https://media.gettyimages.com/photos/bernese-mountain-dog-puppy-isolated-on-white-picture-id609380545",
         "description":"description 3"
     },
     {
         "title":"Shorkie",
-        "imgLink":"https://media.gettyimages.com/photos/shorkie-picture-id184977068",
+        "urlToImage":"https://media.gettyimages.com/photos/shorkie-picture-id184977068",
         "description":"description 4"
     },
     {
         "title":"Chihuahua",
-        "imgLink":"https://media.gettyimages.com/photos/puppy-chihuahua-looking-at-the-camera-isolated-on-white-4-months-old-picture-id657477406",
+        "urlToImage":"https://media.gettyimages.com/photos/puppy-chihuahua-looking-at-the-camera-isolated-on-white-4-months-old-picture-id657477406",
         "description":"description 5"
     },
     {
         "title":"Labrador",
-        "imgLink":"https://media.gettyimages.com/photos/chocolate-labrador-puppy-with-its-tongue-out-facing-the-camera-on-a-picture-id1158538042",
+        "urlToImage":"https://media.gettyimages.com/photos/chocolate-labrador-puppy-with-its-tongue-out-facing-the-camera-on-a-picture-id1158538042",
         "description":"description 6"
     },
     {
         "title":"Shetland Sheepdog",
-        "imgLink":"https://media.gettyimages.com/photos/shetland-sheepdog-isolated-on-white-picture-id609380595",
+        "urlToImage":"https://media.gettyimages.com/photos/shetland-sheepdog-isolated-on-white-picture-id609380595",
         "description":"description 7"
     },
     {
         "title":"Staffordshire Bull Terrier",
-        "imgLink":"https://media.gettyimages.com/photos/front-on-portrait-of-a-brindle-and-white-staffordshire-bull-terrier-picture-id1159123842",
+        "urlToImage":"https://media.gettyimages.com/photos/front-on-portrait-of-a-brindle-and-white-staffordshire-bull-terrier-picture-id1159123842",
         "description":"description 8"
     },
     {
         "title":"French Bulldog",
-        "imgLink":"https://media.gettyimages.com/photos/french-bulldog-in-studio-picture-id1154772430",
+        "urlToImage":"https://media.gettyimages.com/photos/french-bulldog-in-studio-picture-id1154772430",
         "description":"description 9"
     },
     {
         "title":"Cavalier King Charles Spaniel",
-        "imgLink":"https://media.gettyimages.com/photos/cavalier-king-charles-spaniel-in-studio-picture-id1154772543",
+        "urlToImage":"https://media.gettyimages.com/photos/cavalier-king-charles-spaniel-in-studio-picture-id1154772543",
         "description":"description 10"
     }
 ]
